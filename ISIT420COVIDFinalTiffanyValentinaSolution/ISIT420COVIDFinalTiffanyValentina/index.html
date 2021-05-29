@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="Scripts/App1.js"></script>
+</head>
+<body>
+    <div>
+        <h1>COVID DEATHS RESEARCH IN CT</h1>
+        <h2> How many COVID tests were positive in the nursing homes on June 19, 2020, as well as how many tests were positive in the same town on the same day? </h2>
+        <h3> Will show the total number of positive in the nursing homes on June 19, 2020 and the total number of positive tests in the same town on the same day:</h3>
+        <!--<select name="nursingHomeSelect" id="nursinghomedropdown">Select NursingHome</select>-->
+        <input type="button" value="Get June 19 tests" onclick="GetShowDataQuery1()" />
+        <!--<p><span id="numberByCity"></span></p>-->
+        <br />
+    </div>
+
+    <div>
+        <h2> How many totals of deaths occurs in Hamden on June 11, 2020, in whole Town compared to total deaths number in Nursing homes in the same town on the same date? </h2>
+        <h3> Will show the total amount deaths in Hamden on June 11, 2020 compared to Nursing homes' death in Hamden:</h3>
+        <input type="button" value="Get Hamden June 11 deaths" onclick="GetShowDataQuery2()" />
+    </div>
+
+    <div>
+        <h2> List all the nursing homes between May 1st, 2020, and May 31st, 2020, that had more than 50 Positive COVID tests. </h2>
+        <h3> Will show the list of all the nursing homes between May 1st, 2020, and May 31st, 2020 with more than 50 Positive COVID tests :</h3>
+        <input type="button" value="Get Nursing Homes May Covid Positive" onclick="GetShowDataQuery3()" />
+        <ul id="nursinghome50" />
+    </div>
+</body>
+</html>
