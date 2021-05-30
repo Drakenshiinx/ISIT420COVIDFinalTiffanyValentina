@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CovidDeathsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="NursingHomeDeathsTable">
+    <Key>
+      <PropertyRef Name="DeathID" />
+    </Key>
+    <Property Name="DeathID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="LicenseNum" Type="Int32" Nullable="false" />
+    <Property Name="TownName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NursingHome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="COVIDPositive" Type="Int32" Nullable="false" />
+    <Property Name="COVIDDeath" Type="Int32" Nullable="false" />
+    <Property Name="ProbableDeath" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NursingHomeIDTable" Relationship="Self.FK_NursingHomeDeathsTable_NursingHomeIDTable" FromRole="NursingHomeDeathsTable" ToRole="NursingHomeIDTable" />
+  </EntityType>
+  <EntityType Name="NursingHomeIDTable">
+    <Key>
+      <PropertyRef Name="LicenseNum" />
+    </Key>
+    <Property Name="LicenseNum" Type="Int32" Nullable="false" />
+    <Property Name="NursingHome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NursingHomeDeathsTables" Relationship="Self.FK_NursingHomeDeathsTable_NursingHomeIDTable" FromRole="NursingHomeIDTable" ToRole="NursingHomeDeathsTable" />
+  </EntityType>
+  <EntityType Name="TownCTDeathsTable">
+    <Key>
+      <PropertyRef Name="DeathID" />
+    </Key>
+    <Property Name="DeathID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="TownName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TownID" Type="Int32" Nullable="false" />
+    <Property Name="TotalCases" Type="Int32" Nullable="false" />
+    <Property Name="ConfirmedCases" Type="Int32" Nullable="false" />
+    <Property Name="ProbableCases" Type="Int32" Nullable="false" />
+    <Property Name="TotalDeaths" Type="Int32" Nullable="false" />
+    <Property Name="ConfirmedCOVIDDeaths" Type="Int32" Nullable="false" />
+    <Property Name="ProbableDeaths" Type="Int32" Nullable="false" />
+    <Property Name="PeopleTested" Type="Int32" Nullable="false" />
+    <Property Name="NumOfTest" Type="Int32" Nullable="false" />
+    <Property Name="TestPositive" Type="Int32" Nullable="false" />
+    <Property Name="TestNegative" Type="Int32" Nullable="false" />
+    <Property Name="TestUnknown" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TownNamesIDTable" Relationship="Self.FK_TownCTDeathsTable_TownNamesIDTable" FromRole="TownCTDeathsTable" ToRole="TownNamesIDTable" />
+  </EntityType>
+  <EntityType Name="TownNamesIDTable">
+    <Key>
+      <PropertyRef Name="TownID" />
+    </Key>
+    <Property Name="TownID" Type="Int32" Nullable="false" />
+    <Property Name="TownName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TownCTDeathsTables" Relationship="Self.FK_TownCTDeathsTable_TownNamesIDTable" FromRole="TownNamesIDTable" ToRole="TownCTDeathsTable" />
+  </EntityType>
+  <Association Name="FK_NursingHomeDeathsTable_NursingHomeIDTable">
+    <End Role="NursingHomeIDTable" Type="Self.NursingHomeIDTable" Multiplicity="1" />
+    <End Role="NursingHomeDeathsTable" Type="Self.NursingHomeDeathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NursingHomeIDTable">
+        <PropertyRef Name="LicenseNum" />
+      </Principal>
+      <Dependent Role="NursingHomeDeathsTable">
+        <PropertyRef Name="LicenseNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownCTDeathsTable_TownNamesIDTable">
+    <End Role="TownNamesIDTable" Type="Self.TownNamesIDTable" Multiplicity="1" />
+    <End Role="TownCTDeathsTable" Type="Self.TownCTDeathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TownNamesIDTable">
+        <PropertyRef Name="TownID" />
+      </Principal>
+      <Dependent Role="TownCTDeathsTable">
+        <PropertyRef Name="TownID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CovidDeathsDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="NursingHomeDeathsTables" EntityType="Self.NursingHomeDeathsTable" />
+    <EntitySet Name="NursingHomeIDTables" EntityType="Self.NursingHomeIDTable" />
+    <EntitySet Name="TownCTDeathsTables" EntityType="Self.TownCTDeathsTable" />
+    <EntitySet Name="TownNamesIDTables" EntityType="Self.TownNamesIDTable" />
+    <AssociationSet Name="FK_NursingHomeDeathsTable_NursingHomeIDTable" Association="Self.FK_NursingHomeDeathsTable_NursingHomeIDTable">
+      <End Role="NursingHomeIDTable" EntitySet="NursingHomeIDTables" />
+      <End Role="NursingHomeDeathsTable" EntitySet="NursingHomeDeathsTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownCTDeathsTable_TownNamesIDTable" Association="Self.FK_TownCTDeathsTable_TownNamesIDTable">
+      <End Role="TownNamesIDTable" EntitySet="TownNamesIDTables" />
+      <End Role="TownCTDeathsTable" EntitySet="TownCTDeathsTables" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

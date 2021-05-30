@@ -5,9 +5,9 @@
     <title></title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <!--<link rel="stylesheet" href="index.css">-->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="Scripts/App1.js"></script>
+    <script type="text/javascript" src="Scripts/App2.js"></script>
 </head>
 <body>
     <div>
@@ -24,13 +24,34 @@
         <h2> How many totals of deaths occurs in Hamden on June 11, 2020, in whole Town compared to total deaths number in Nursing homes in the same town on the same date? </h2>
         <h3> Will show the total amount deaths in Hamden on June 11, 2020 compared to Nursing homes' death in Hamden:</h3>
         <input type="button" value="Get Hamden June 11 deaths" onclick="GetShowDataQuery2()" />
+        <table id="table2">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>NursingHome</th>
+                    <th>TownName</th>
+                    <th>COVIDDeath</th>
+                    <th>ConfirmedCOVIDDeaths</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 
     <div>
         <h2> List all the nursing homes between May 1st, 2020, and May 31st, 2020, that had more than 50 Positive COVID tests. </h2>
         <h3> Will show the list of all the nursing homes between May 1st, 2020, and May 31st, 2020 with more than 50 Positive COVID tests :</h3>
-        <input type="button" value="Get Nursing Homes May Covid Positive" onclick="GetShowDataQuery3()" />
-        <ul id="nursinghome50" />
+        <input type="button" id="nursinghomes" value="Get Nursing Homes May Covid Positive" onclick="GetShowDataQuery3()" />
+        <!--<ul id="nursinghome50" />-->
+        <table id="table3">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>TownName</th>
+                    <th>NursingHome</th>
+                    <th>COVIDPositive</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </body>
 </html>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CovidDeathsDBModelStoreContainer" CdmEntityContainer="CovidDeathsDBEntities">
+    <EntitySetMapping Name="NursingHomeDeathsTables">
+      <EntityTypeMapping TypeName="CovidDeathsDBModel.NursingHomeDeathsTable">
+        <MappingFragment StoreEntitySet="NursingHomeDeathsTable">
+          <ScalarProperty Name="DeathID" ColumnName="DeathID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="LicenseNum" ColumnName="LicenseNum" />
+          <ScalarProperty Name="TownName" ColumnName="TownName" />
+          <ScalarProperty Name="NursingHome" ColumnName="NursingHome" />
+          <ScalarProperty Name="COVIDPositive" ColumnName="COVIDPositive" />
+          <ScalarProperty Name="COVIDDeath" ColumnName="COVIDDeath" />
+          <ScalarProperty Name="ProbableDeath" ColumnName="ProbableDeath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NursingHomeIDTables">
+      <EntityTypeMapping TypeName="CovidDeathsDBModel.NursingHomeIDTable">
+        <MappingFragment StoreEntitySet="NursingHomeIDTable">
+          <ScalarProperty Name="LicenseNum" ColumnName="LicenseNum" />
+          <ScalarProperty Name="NursingHome" ColumnName="NursingHome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TownCTDeathsTables">
+      <EntityTypeMapping TypeName="CovidDeathsDBModel.TownCTDeathsTable">
+        <MappingFragment StoreEntitySet="TownCTDeathsTable">
+          <ScalarProperty Name="DeathID" ColumnName="DeathID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="TownName" ColumnName="TownName" />
+          <ScalarProperty Name="TownID" ColumnName="TownID" />
+          <ScalarProperty Name="TotalCases" ColumnName="TotalCases" />
+          <ScalarProperty Name="ConfirmedCases" ColumnName="ConfirmedCases" />
+          <ScalarProperty Name="ProbableCases" ColumnName="ProbableCases" />
+          <ScalarProperty Name="TotalDeaths" ColumnName="TotalDeaths" />
+          <ScalarProperty Name="ConfirmedCOVIDDeaths" ColumnName="ConfirmedCOVIDDeaths" />
+          <ScalarProperty Name="ProbableDeaths" ColumnName="ProbableDeaths" />
+          <ScalarProperty Name="PeopleTested" ColumnName="PeopleTested" />
+          <ScalarProperty Name="NumOfTest" ColumnName="NumOfTest" />
+          <ScalarProperty Name="TestPositive" ColumnName="TestPositive" />
+          <ScalarProperty Name="TestNegative" ColumnName="TestNegative" />
+          <ScalarProperty Name="TestUnknown" ColumnName="TestUnknown" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TownNamesIDTables">
+      <EntityTypeMapping TypeName="CovidDeathsDBModel.TownNamesIDTable">
+        <MappingFragment StoreEntitySet="TownNamesIDTable">
+          <ScalarProperty Name="TownID" ColumnName="TownID" />
+          <ScalarProperty Name="TownName" ColumnName="TownName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

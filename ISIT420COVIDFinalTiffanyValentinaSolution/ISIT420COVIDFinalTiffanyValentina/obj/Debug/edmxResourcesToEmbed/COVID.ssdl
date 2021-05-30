@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CovidDeathsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="NursingHomeDeathsTable">
+    <Key>
+      <PropertyRef Name="DeathID" />
+    </Key>
+    <Property Name="DeathID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="LicenseNum" Type="int" Nullable="false" />
+    <Property Name="TownName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NursingHome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="COVIDPositive" Type="int" Nullable="false" />
+    <Property Name="COVIDDeath" Type="int" Nullable="false" />
+    <Property Name="ProbableDeath" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NursingHomeIDTable">
+    <Key>
+      <PropertyRef Name="LicenseNum" />
+    </Key>
+    <Property Name="LicenseNum" Type="int" Nullable="false" />
+    <Property Name="NursingHome" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TownCTDeathsTable">
+    <Key>
+      <PropertyRef Name="DeathID" />
+    </Key>
+    <Property Name="DeathID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="TownName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TownID" Type="int" Nullable="false" />
+    <Property Name="TotalCases" Type="int" Nullable="false" />
+    <Property Name="ConfirmedCases" Type="int" Nullable="false" />
+    <Property Name="ProbableCases" Type="int" Nullable="false" />
+    <Property Name="TotalDeaths" Type="int" Nullable="false" />
+    <Property Name="ConfirmedCOVIDDeaths" Type="int" Nullable="false" />
+    <Property Name="ProbableDeaths" Type="int" Nullable="false" />
+    <Property Name="PeopleTested" Type="int" Nullable="false" />
+    <Property Name="NumOfTest" Type="int" Nullable="false" />
+    <Property Name="TestPositive" Type="int" Nullable="false" />
+    <Property Name="TestNegative" Type="int" Nullable="false" />
+    <Property Name="TestUnknown" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TownNamesIDTable">
+    <Key>
+      <PropertyRef Name="TownID" />
+    </Key>
+    <Property Name="TownID" Type="int" Nullable="false" />
+    <Property Name="TownName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_NursingHomeDeathsTable_NursingHomeIDTable">
+    <End Role="NursingHomeIDTable" Type="Self.NursingHomeIDTable" Multiplicity="1" />
+    <End Role="NursingHomeDeathsTable" Type="Self.NursingHomeDeathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NursingHomeIDTable">
+        <PropertyRef Name="LicenseNum" />
+      </Principal>
+      <Dependent Role="NursingHomeDeathsTable">
+        <PropertyRef Name="LicenseNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownCTDeathsTable_TownNamesIDTable">
+    <End Role="TownNamesIDTable" Type="Self.TownNamesIDTable" Multiplicity="1" />
+    <End Role="TownCTDeathsTable" Type="Self.TownCTDeathsTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TownNamesIDTable">
+        <PropertyRef Name="TownID" />
+      </Principal>
+      <Dependent Role="TownCTDeathsTable">
+        <PropertyRef Name="TownID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CovidDeathsDBModelStoreContainer">
+    <EntitySet Name="NursingHomeDeathsTable" EntityType="Self.NursingHomeDeathsTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NursingHomeIDTable" EntityType="Self.NursingHomeIDTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TownCTDeathsTable" EntityType="Self.TownCTDeathsTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TownNamesIDTable" EntityType="Self.TownNamesIDTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_NursingHomeDeathsTable_NursingHomeIDTable" Association="Self.FK_NursingHomeDeathsTable_NursingHomeIDTable">
+      <End Role="NursingHomeIDTable" EntitySet="NursingHomeIDTable" />
+      <End Role="NursingHomeDeathsTable" EntitySet="NursingHomeDeathsTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownCTDeathsTable_TownNamesIDTable" Association="Self.FK_TownCTDeathsTable_TownNamesIDTable">
+      <End Role="TownNamesIDTable" EntitySet="TownNamesIDTable" />
+      <End Role="TownCTDeathsTable" EntitySet="TownCTDeathsTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
