@@ -17,19 +17,20 @@ namespace ISIT420COVIDFinalTiffanyValentina.Controllers
         {
             DateTime dateSpecific = new DateTime(2020, 06, 19);
 
-            var CovidTestPos = from NursingHome in myDB.NursingHomeDeathsTables
-                               from Towns in myDB.TownCTDeathsTables
+            var CovidTestPos = (from NursingHome in myDB.NursingHomeDeathsTables
+                                join Towns in myDB.TownCTDeathsTables
+                                on NursingHome.TownName equals Towns.TownName
                                where Towns.Date == dateSpecific && NursingHome.Date == dateSpecific
                                select new 
                                {
                                    Towns.Date,
                                    NursingHome.NursingHome,
-                                   Towns.TownName,
+                                   NursingHome.TownName,
                                    NursingHome.COVIDDeath,
                                    Towns.ConfirmedCOVIDDeaths,
                                    NursingHome.COVIDPositive,
                                    Towns.TestPositive
-                               };
+                               }).Distinct();
 
             return Json(CovidTestPos);
         }
